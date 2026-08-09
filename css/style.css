@@ -1080,7 +1080,9 @@ body {
 
 /* Transaction Table */
 .transactions-table-wrap {
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
 }
 
 .transactions-table {
