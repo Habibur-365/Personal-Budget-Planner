@@ -333,39 +333,73 @@ const Settings = (() => {
 
         // PDF Export
         document.getElementById('btn-export-pdf').onclick = () => {
-            if (!window.jspdf) {
+            if (!window.html2pdf) {
                 Utils.showToast('PDF Library not loaded', 'error');
                 return;
             }
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            
-            doc.setFontSize(20);
-            doc.text("BudgetPro - Financial Report", 14, 22);
-            
-            doc.setFontSize(11);
-            doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 14, 30);
             
             const txs = Storage.getTransactions();
-            const tableData = txs.map(t => {
+            
+            const container = document.createElement('div');
+            container.style.padding = '30px';
+            container.style.fontFamily = "'Inter', sans-serif";
+            container.style.color = '#1a1a2e';
+            
+            let tableRows = '';
+            txs.forEach(t => {
                 const c = Utils.getCategoryById(t.category);
-                return [
-                    Utils.formatDate(t.date),
-                    t.type.toUpperCase(),
-                    c.name,
-                    t.amount.toString(),
-                    t.note || ''
-                ];
+                const amountColor = t.type === 'income' ? '#00b894' : '#d63031';
+                tableRows += `
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 10px 8px;">${Utils.formatDate(t.date)}</td>
+                        <td style="padding: 10px 8px; font-weight: bold; color: ${amountColor};">${t.type.toUpperCase()}</td>
+                        <td style="padding: 10px 8px;">${c.name}</td>
+                        <td style="padding: 10px 8px; text-align: right; color: ${amountColor};">${t.amount}</td>
+                        <td style="padding: 10px 8px;">${t.note || ''}</td>
+                    </tr>
+                `;
             });
 
-            doc.autoTable({
-                startY: 40,
-                head: [['Date', 'Type', 'Category', 'Amount', 'Note']],
-                body: tableData,
-            });
+            container.innerHTML = `
+                <div style="margin-bottom: 30px;">
+                    <h1 style="font-size: 24px; margin: 0; color: #1a1a2e;">HR BudgetPro</h1>
+                    <h2 style="font-size: 16px; margin: 5px 0; color: #444;">Financial Report</h2>
+                    <p style="font-size: 12px; color: #888; margin: 0;">Generated on: ${new Date().toLocaleDateString()}</p>
+                </div>
+                
+                <table style="width: 100%; border-collapse: collapse; font-size: 12px;">
+                    <thead>
+                        <tr style="background-color: #7c5cfc; color: white; text-align: left;">
+                            <th style="padding: 10px 8px;">Date</th>
+                            <th style="padding: 10px 8px;">Type</th>
+                            <th style="padding: 10px 8px;">Category</th>
+                            <th style="padding: 10px 8px; text-align: right;">Amount</th>
+                            <th style="padding: 10px 8px;">Note</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${tableRows}
+                    </tbody>
+                </table>
+            `;
 
-            doc.save(`budgetpro-report-${Utils.getTodayString()}.pdf`);
-            Utils.showToast('PDF exported successfully!', 'success');
+            Utils.showToast('Generating PDF...', 'info');
+            
+            const fileName = `budgetpro-report-${Utils.getTodayString()}.pdf`;
+            const opt = {
+                margin:       15,
+                filename:     fileName,
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+            
+            html2pdf().set(opt).from(container).save().then(() => {
+                Utils.showToast('PDF exported successfully!', 'success');
+            }).catch(err => {
+                console.error(err);
+                Utils.showToast('Error generating PDF', 'error');
+            });
         };
 
         // CSV/Excel Import

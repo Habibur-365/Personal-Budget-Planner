@@ -359,92 +359,81 @@ const Transactions = (() => {
             return;
         }
 
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF('p', 'mm', 'a4');
-
         const title = getExportTitle();
-
-        // Header
-        doc.setFontSize(16);
-        doc.setFont('helvetica', 'bold');
-        doc.text('BudgetPro', 14, 15);
-
-        doc.setFontSize(11);
-        doc.setFont('helvetica', 'normal');
-        doc.text(title, 14, 22);
-
-        doc.setFontSize(9);
-        doc.setTextColor(120);
-        doc.text(`Generated: ${new Date().toLocaleString()}`, 14, 28);
-        doc.setTextColor(0);
 
         // Compute summary
         const totalIncome = data.filter(d => d.type === 'Income').reduce((s, d) => s + d.amount, 0);
         const totalExpense = data.filter(d => d.type === 'Expense').reduce((s, d) => s + d.amount, 0);
 
-        // Table
-        const tableData = data.map(d => [d.date, d.category, d.note, d.type, d.amountFormatted]);
-
-        doc.autoTable({
-            head: [['Date', 'Category', 'Note', 'Type', 'Amount']],
-            body: tableData,
-            startY: 33,
-            styles: {
-                fontSize: 9,
-                cellPadding: 4,
-                lineColor: [220, 220, 220],
-                lineWidth: 0.25
-            },
-            headStyles: {
-                fillColor: [124, 92, 252],
-                textColor: [255, 255, 255],
-                fontStyle: 'bold',
-                halign: 'left'
-            },
-            alternateRowStyles: {
-                fillColor: [245, 245, 250]
-            },
-            columnStyles: {
-                0: { cellWidth: 35 },
-                1: { cellWidth: 45 },
-                2: { cellWidth: 'auto' },
-                3: { cellWidth: 25 },
-                4: { cellWidth: 40, halign: 'right' }
-            },
-            didParseCell: function(data) {
-                if (data.section === 'body' && data.column.index === 3) {
-                    const val = data.cell.raw;
-                    if (val === 'Income') {
-                        data.cell.styles.textColor = [0, 180, 100];
-                        data.cell.styles.fontStyle = 'bold';
-                    } else {
-                        data.cell.styles.textColor = [220, 50, 50];
-                        data.cell.styles.fontStyle = 'bold';
-                    }
-                }
-                if (data.section === 'body' && data.column.index === 4) {
-                    const val = data.cell.raw;
-                    if (val.startsWith('+')) {
-                        data.cell.styles.textColor = [0, 180, 100];
-                    } else if (val.startsWith('-')) {
-                        data.cell.styles.textColor = [220, 50, 50];
-                    }
-                }
-            }
+        // Create a hidden HTML container for the PDF content
+        const container = document.createElement('div');
+        container.style.padding = '30px';
+        container.style.fontFamily = "'Inter', sans-serif";
+        container.style.color = '#1a1a2e';
+        
+        let tableRows = '';
+        data.forEach(d => {
+            const amountColor = d.type === 'Income' ? '#00b894' : '#d63031';
+            const typeColor = d.type === 'Income' ? '#00b894' : '#d63031';
+            tableRows += `
+                <tr style="border-bottom: 1px solid #eee;">
+                    <td style="padding: 10px 8px;">${d.date}</td>
+                    <td style="padding: 10px 8px;">${d.category}</td>
+                    <td style="padding: 10px 8px;">${d.note}</td>
+                    <td style="padding: 10px 8px; font-weight: bold; color: ${typeColor};">${d.type}</td>
+                    <td style="padding: 10px 8px; text-align: right; color: ${amountColor};">${d.amountFormatted}</td>
+                </tr>
+            `;
         });
 
-        // Summary footer
-        const finalY = doc.lastAutoTable.finalY + 8;
-        doc.setFontSize(10);
-        doc.setFont('helvetica', 'bold');
-        doc.text(`Total Transactions: ${data.length}`, 14, finalY);
-        doc.text(`Total Income: ${Utils.formatCurrency(totalIncome)}`, 14, finalY + 6);
-        doc.text(`Total Expense: ${Utils.formatCurrency(totalExpense)}`, 14, finalY + 12);
-        doc.text(`Net Balance: ${Utils.formatCurrency(totalIncome - totalExpense)}`, 14, finalY + 18);
+        container.innerHTML = `
+            <div style="margin-bottom: 30px;">
+                <h1 style="font-size: 24px; margin: 0; color: #1a1a2e;">HR BudgetPro</h1>
+                <h2 style="font-size: 16px; margin: 5px 0; color: #444;">${title}</h2>
+                <p style="font-size: 12px; color: #888; margin: 0;">Generated: ${new Date().toLocaleString()}</p>
+            </div>
+            
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px; font-size: 12px;">
+                <thead>
+                    <tr style="background-color: #7c5cfc; color: white; text-align: left;">
+                        <th style="padding: 10px 8px;">Date</th>
+                        <th style="padding: 10px 8px;">Category</th>
+                        <th style="padding: 10px 8px;">Note</th>
+                        <th style="padding: 10px 8px;">Type</th>
+                        <th style="padding: 10px 8px; text-align: right;">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${tableRows}
+                </tbody>
+            </table>
+            
+            <div style="font-size: 14px; font-weight: bold;">
+                <p style="margin: 6px 0;">Total Transactions: ${data.length}</p>
+                <p style="margin: 6px 0;">Total Income: ${Utils.formatCurrency(totalIncome)}</p>
+                <p style="margin: 6px 0;">Total Expense: ${Utils.formatCurrency(totalExpense)}</p>
+                <p style="margin: 6px 0;">Net Balance: ${Utils.formatCurrency(totalIncome - totalExpense)}</p>
+            </div>
+        `;
 
         const fileName = `BudgetPro_Transactions_${new Date().toISOString().slice(0, 10)}.pdf`;
-        doc.save(fileName);
-        Utils.showToast('PDF exported successfully!', 'success');
+        
+        Utils.showToast('Generating PDF...', 'info');
+        
+        const opt = {
+            margin:       15,
+            filename:     fileName,
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2, useCORS: true },
+            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+        
+        html2pdf().set(opt).from(container).save().then(() => {
+            Utils.showToast('PDF exported successfully!', 'success');
+        }).catch(err => {
+            console.error(err);
+            Utils.showToast('Error generating PDF', 'error');
+        });
     }
 
     /* ---------- Export to Excel ---------- */
