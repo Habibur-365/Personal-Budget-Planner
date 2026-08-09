@@ -122,12 +122,18 @@ const Settings = (() => {
 
                 if (delBtn) {
                     const id = delBtn.dataset.id;
-                    if (confirm('Are you sure you want to delete this wallet?')) {
+                    document.getElementById('confirm-title').textContent = 'Delete Wallet';
+                    document.getElementById('confirm-message').textContent = 'Are you sure you want to delete this wallet? All associated data will remain but unlinked.';
+                    const confirmBtn = document.getElementById('btn-confirm-action');
+                    confirmBtn.textContent = 'Delete';
+                    confirmBtn.onclick = () => {
                         Storage.deleteWallet(id);
+                        App.closeModal('modal-confirm-overlay');
                         Utils.showToast('Wallet deleted', 'info');
                         renderWallets();
                         if (typeof App !== 'undefined') App.setupWalletSelector();
-                    }
+                    };
+                    App.openModal('modal-confirm-overlay');
                 }
             };
         }
@@ -259,11 +265,17 @@ const Settings = (() => {
         document.getElementById('recurring-list').onclick = (e) => {
             const delBtn = e.target.closest('.delete-rec-btn');
             if (delBtn) {
-                if(confirm('Delete this recurring bill?')) {
+                document.getElementById('confirm-title').textContent = 'Delete Recurring Bill';
+                document.getElementById('confirm-message').textContent = 'Are you sure you want to delete this recurring bill?';
+                const confirmBtn = document.getElementById('btn-confirm-action');
+                confirmBtn.textContent = 'Delete';
+                confirmBtn.onclick = () => {
                     Storage.deleteRecurringTransaction(delBtn.dataset.id);
+                    App.closeModal('modal-confirm-overlay');
                     Utils.showToast('Deleted!', 'info');
                     renderRecurring();
-                }
+                };
+                App.openModal('modal-confirm-overlay');
             }
         };
     }

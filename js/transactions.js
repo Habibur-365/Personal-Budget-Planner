@@ -244,7 +244,7 @@ const Transactions = (() => {
 
     /* ---------- Open Edit Modal ---------- */
     function openEditModal(id) {
-        const tx = Storage.getTransactions().find(t => t.id === id);
+        const tx = Storage.getAllTransactions().find(t => t.id === id);
         if (!tx) return;
 
         document.getElementById('modal-transaction-title').textContent = 'Edit Transaction';
@@ -283,7 +283,7 @@ const Transactions = (() => {
 
     /* ---------- Confirm Delete ---------- */
     function confirmDelete(id) {
-        const tx = Storage.getTransactions().find(t => t.id === id);
+        const tx = Storage.getAllTransactions().find(t => t.id === id);
         if (!tx) return;
 
         const cat = Utils.getCategoryById(tx.category);
@@ -308,6 +308,7 @@ const Transactions = (() => {
 
     /* ---------- Refresh ---------- */
     function refresh() {
+        populateCategoryFilter();
         populateMonthFilter();
         renderTransactions();
     }

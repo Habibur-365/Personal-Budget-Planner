@@ -430,6 +430,8 @@ const Storage = (() => {
         localStorage.removeItem(KEYS.NOTIFICATIONS);
         localStorage.removeItem(KEYS.WALLETS);
         localStorage.removeItem(KEYS.ACTIVE_WALLET);
+        localStorage.removeItem(KEYS.RECURRING);
+        localStorage.removeItem('bp_last_bill_notif');
     }
 
     /* ========== SEED DATA ========== */

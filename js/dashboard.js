@@ -235,7 +235,8 @@ const Dashboard = (() => {
                             color: textColor,
                             font: { family: 'Inter', size: 11 },
                             callback: function(val) {
-                                return 'Tk' + (val / 1000).toFixed(0) + 'k';
+                                const sym = Utils.getCurrencySymbol();
+                                return sym + (val / 1000).toFixed(0) + 'k';
                             }
                         }
                     },

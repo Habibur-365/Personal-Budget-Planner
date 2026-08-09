@@ -314,8 +314,9 @@ const App = (() => {
                 const note = document.getElementById('tx-note').value;
                 const walletId = walletSelect ? walletSelect.value : undefined;
 
-                if (!amount || !category || !date) {
-                    Utils.showToast('Please fill all required fields.', 'error');
+                const parsedAmount = parseFloat(amount);
+                if (!amount || isNaN(parsedAmount) || parsedAmount <= 0 || !category || !date) {
+                    Utils.showToast('Please fill all required fields with valid values. Amount must be greater than 0.', 'error');
                     return;
                 }
 

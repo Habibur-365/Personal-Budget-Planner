@@ -254,7 +254,7 @@ const Analytics = (() => {
     function renderPieChart(period) {
         const canvas = document.getElementById('chart-pie');
         const ctx = canvas.getContext('2d');
-        const theme = getTheme();
+        const theme = getTheme(ctx);
         const months = Utils.getLastNMonthKeys(period);
 
         if (pieChart) pieChart.destroy();
@@ -312,7 +312,7 @@ const Analytics = (() => {
     function renderIncomeSourcesChart(period) {
         const canvas = document.getElementById('chart-income-sources');
         const ctx = canvas.getContext('2d');
-        const theme = getTheme();
+        const theme = getTheme(ctx);
         const months = Utils.getLastNMonthKeys(period);
 
         if (incomeSourcesChart) incomeSourcesChart.destroy();
@@ -372,7 +372,7 @@ const Analytics = (() => {
     function renderTopCategoriesChart(period) {
         const canvas = document.getElementById('chart-top-categories');
         const ctx = canvas.getContext('2d');
-        const theme = getTheme();
+        const theme = getTheme(ctx);
         const months = Utils.getLastNMonthKeys(period);
 
         if (topCategoriesChart) topCategoriesChart.destroy();
@@ -430,8 +430,8 @@ const Analytics = (() => {
             totalIncome += s.income;
             totalExpense += s.expense;
         });
-        const avgIncome = totalIncome / 6 || 0;
-        const avgExpense = totalExpense / 6 || 0;
+        const avgIncome = pastMonths.length > 0 ? totalIncome / pastMonths.length : 0;
+        const avgExpense = pastMonths.length > 0 ? totalExpense / pastMonths.length : 0;
 
         // Next 3 months
         const currentMonth = Utils.getCurrentMonthKey();
@@ -573,6 +573,12 @@ const Analytics = (() => {
         });
     }
 
+    /* ---------- Refresh ---------- */
+    function refresh() {
+        destroy();
+        render();
+    }
+
     /* ---------- Cleanup ---------- */
     function destroy() {
         if (trendsChart) { trendsChart.destroy(); trendsChart = null; }
@@ -583,6 +589,6 @@ const Analytics = (() => {
         if (forecastChart) { forecastChart.destroy(); forecastChart = null; }
     }
 
-    return { render, destroy };
+    return { render, refresh, destroy };
 
 })();
