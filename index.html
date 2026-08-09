@@ -136,7 +136,7 @@
             </a>
             <a href="#transactions" class="bottom-nav-item" data-page="transactions">
                 <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-                <span>Activity</span>
+                <span>Transactions</span>
             </a>
             <a href="#budget" class="bottom-nav-item" data-page="budget">
                 <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
@@ -358,6 +358,17 @@
                             </svg>
                             Excel
                         </button>
+                    </div>
+                </div>
+
+                <div class="tx-summary-cards" style="display: flex; gap: 16px; margin-bottom: 20px;">
+                    <div class="glass-card" style="flex: 1; padding: 16px;">
+                        <h4 style="margin:0; font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase;">Total Income</h4>
+                        <div id="tx-summary-income" style="font-size: 1.25rem; font-weight: 700; color: var(--success); margin-top: 8px;">Tk0</div>
+                    </div>
+                    <div class="glass-card" style="flex: 1; padding: 16px;">
+                        <h4 style="margin:0; font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase;">Total Expense</h4>
+                        <div id="tx-summary-expense" style="font-size: 1.25rem; font-weight: 700; color: var(--danger); margin-top: 8px;">Tk0</div>
                     </div>
                 </div>
 

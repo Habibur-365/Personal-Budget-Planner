@@ -126,11 +126,21 @@ const Transactions = (() => {
             tbody.innerHTML = '';
             tableWrap.style.display = 'none';
             emptyState.style.display = 'block';
-            return;
+        } else {
+            tableWrap.style.display = 'block';
+            emptyState.style.display = 'none';
         }
 
-        tableWrap.style.display = 'block';
-        emptyState.style.display = 'none';
+        // Update Summary Cards
+        const incomeTotal = transactions.filter(t => t.type === 'income').reduce((s, t) => s + t.amount, 0);
+        const expenseTotal = transactions.filter(t => t.type === 'expense').reduce((s, t) => s + t.amount, 0);
+        
+        const incomeCard = document.getElementById('tx-summary-income');
+        const expenseCard = document.getElementById('tx-summary-expense');
+        if (incomeCard) incomeCard.textContent = Utils.formatCurrency(incomeTotal);
+        if (expenseCard) expenseCard.textContent = Utils.formatCurrency(expenseTotal);
+
+        if (transactions.length === 0) return;
 
         tbody.innerHTML = transactions.map(tx => {
             const cat = Utils.getCategoryById(tx.category);
