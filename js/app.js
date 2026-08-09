@@ -331,7 +331,12 @@ const App = (() => {
                 }
 
                 closeModal('modal-transaction-overlay');
-                refreshCurrentPage();
+                // Refresh all data-driven pages so dashboard, transactions, budget, analytics all stay in sync
+                Dashboard.render();
+                if (typeof Transactions !== 'undefined' && Transactions.refresh) Transactions.refresh();
+                if (typeof Budget !== 'undefined' && Budget.refresh) Budget.refresh();
+                if (typeof Analytics !== 'undefined' && Analytics.refresh) Analytics.refresh();
+                if (typeof Calendar !== 'undefined' && Calendar.refresh) Calendar.refresh();
             });
         }
 
