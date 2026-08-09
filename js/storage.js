@@ -465,100 +465,16 @@ const Storage = (() => {
         setActiveWalletId('all');
 
         // Initial Transactions
-        const sampleTransactions = [
-            // Current month
-            { walletId: 'wallet_main', type: 'income', amount: 65000, category: 'salary', date: `${currentMonth}-01`, note: 'Monthly Salary' },
-            { walletId: 'wallet_main', type: 'income', amount: 15000, category: 'freelance', date: randomDay(currentMonth), note: 'Web design project' },
-            { walletId: 'wallet_main', type: 'expense', amount: 4500, category: 'food', date: randomDay(currentMonth), note: 'Restaurant dinners' },
-            { walletId: 'wallet_main', type: 'expense', amount: 2200, category: 'transport', date: randomDay(currentMonth), note: 'Uber rides' },
-            { walletId: 'wallet_main', type: 'expense', amount: 8500, category: 'rent', date: `${currentMonth}-05`, note: 'Monthly rent' },
-            { walletId: 'wallet_main', type: 'expense', amount: 3200, category: 'grocery', date: randomDay(currentMonth), note: 'Weekly groceries' },
-            { walletId: 'wallet_main', type: 'expense', amount: 1500, category: 'entertainment', date: randomDay(currentMonth), note: 'Movie & snacks' },
-            { walletId: 'wallet_main', type: 'expense', amount: 2800, category: 'bills', date: randomDay(currentMonth), note: 'Electricity & Internet' },
-            { walletId: 'wallet_main', type: 'expense', amount: 3500, category: 'shopping', date: randomDay(currentMonth), note: 'New clothes' },
-            { walletId: 'wallet_main', type: 'expense', amount: 1200, category: 'health', date: randomDay(currentMonth), note: 'Gym membership' },
-
-            // Last month
-            { walletId: 'wallet_main', type: 'income', amount: 65000, category: 'salary', date: `${lastMonth}-01`, note: 'Monthly Salary' },
-            { walletId: 'wallet_main', type: 'income', amount: 8000, category: 'freelance', date: randomDay(lastMonth), note: 'Logo design' },
-            { walletId: 'wallet_main', type: 'expense', amount: 5200, category: 'food', date: randomDay(lastMonth), note: 'Dining out' },
-            { walletId: 'wallet_main', type: 'expense', amount: 1800, category: 'transport', date: randomDay(lastMonth), note: 'Bus & CNG' },
-            { walletId: 'wallet_main', type: 'expense', amount: 8500, category: 'rent', date: `${lastMonth}-05`, note: 'Monthly rent' },
-            { walletId: 'wallet_main', type: 'expense', amount: 4100, category: 'grocery', date: randomDay(lastMonth), note: 'Groceries' },
-            { walletId: 'wallet_main', type: 'expense', amount: 2000, category: 'entertainment', date: randomDay(lastMonth), note: 'Netflix & games' },
-            { walletId: 'wallet_main', type: 'expense', amount: 3100, category: 'bills', date: randomDay(lastMonth), note: 'Utilities' },
-            { walletId: 'wallet_main', type: 'expense', amount: 6000, category: 'education', date: randomDay(lastMonth), note: 'Online course' },
-            { walletId: 'wallet_main', type: 'expense', amount: 1200, category: 'health', date: randomDay(lastMonth), note: 'Gym' },
-
-            // 2 months ago
-            { walletId: 'wallet_main', type: 'income', amount: 65000, category: 'salary', date: `${twoMonthsAgo}-01`, note: 'Monthly Salary' },
-            { walletId: 'wallet_main', type: 'income', amount: 12000, category: 'freelance', date: randomDay(twoMonthsAgo), note: 'App development' },
-            { walletId: 'wallet_main', type: 'expense', amount: 3800, category: 'food', date: randomDay(twoMonthsAgo), note: 'Food expenses' },
-            { walletId: 'wallet_main', type: 'expense', amount: 2500, category: 'transport', date: randomDay(twoMonthsAgo), note: 'Travel' },
-            { walletId: 'wallet_main', type: 'expense', amount: 8500, category: 'rent', date: `${twoMonthsAgo}-05`, note: 'Monthly rent' },
-            { walletId: 'wallet_main', type: 'expense', amount: 3600, category: 'grocery', date: randomDay(twoMonthsAgo), note: 'Groceries' },
-            { walletId: 'wallet_main', type: 'expense', amount: 4500, category: 'shopping', date: randomDay(twoMonthsAgo), note: 'Electronics' },
-            { walletId: 'wallet_main', type: 'expense', amount: 2900, category: 'bills', date: randomDay(twoMonthsAgo), note: 'Utilities' },
-
-            // 3 months ago
-            { walletId: 'wallet_main', type: 'income', amount: 60000, category: 'salary', date: `${threeMonthsAgo}-01`, note: 'Monthly Salary' },
-            { walletId: 'wallet_main', type: 'expense', amount: 4200, category: 'food', date: randomDay(threeMonthsAgo), note: 'Dining' },
-            { walletId: 'wallet_main', type: 'expense', amount: 8500, category: 'rent', date: `${threeMonthsAgo}-05`, note: 'Monthly rent' },
-            { walletId: 'wallet_main', type: 'expense', amount: 2800, category: 'grocery', date: randomDay(threeMonthsAgo), note: 'Groceries' },
-            { walletId: 'wallet_main', type: 'expense', amount: 3500, category: 'bills', date: randomDay(threeMonthsAgo), note: 'Utilities' },
-            { walletId: 'wallet_main', type: 'expense', amount: 1500, category: 'personal', date: randomDay(threeMonthsAgo), note: 'Haircut & grooming' },
-
-            // 4 months ago
-            { walletId: 'wallet_main', type: 'income', amount: 60000, category: 'salary', date: `${fourMonthsAgo}-01`, note: 'Monthly Salary' },
-            { walletId: 'wallet_main', type: 'income', amount: 5000, category: 'gift', date: randomDay(fourMonthsAgo), note: 'Birthday gift' },
-            { walletId: 'wallet_main', type: 'expense', amount: 3900, category: 'food', date: randomDay(fourMonthsAgo), note: 'Food' },
-            { walletId: 'wallet_main', type: 'expense', amount: 8500, category: 'rent', date: `${fourMonthsAgo}-05`, note: 'Rent' },
-            { walletId: 'wallet_main', type: 'expense', amount: 3200, category: 'grocery', date: randomDay(fourMonthsAgo), note: 'Groceries' },
-            { walletId: 'wallet_main', type: 'expense', amount: 7000, category: 'shopping', date: randomDay(fourMonthsAgo), note: 'Furniture' },
-            { walletId: 'wallet_main', type: 'expense', amount: 2500, category: 'bills', date: randomDay(fourMonthsAgo), note: 'Utilities' },
-
-            // 5 months ago
-            { walletId: 'wallet_main', type: 'income', amount: 60000, category: 'salary', date: `${fiveMonthsAgo}-01`, note: 'Monthly Salary' },
-            { walletId: 'wallet_main', type: 'expense', amount: 4800, category: 'food', date: randomDay(fiveMonthsAgo), note: 'Food expenses' },
-            { walletId: 'wallet_main', type: 'expense', amount: 8500, category: 'rent', date: `${fiveMonthsAgo}-05`, note: 'Rent' },
-            { walletId: 'wallet_main', type: 'expense', amount: 3400, category: 'grocery', date: randomDay(fiveMonthsAgo), note: 'Groceries' },
-            { walletId: 'wallet_main', type: 'expense', amount: 2000, category: 'transport', date: randomDay(fiveMonthsAgo), note: 'Rides' },
-            { walletId: 'wallet_main', type: 'expense', amount: 3000, category: 'bills', date: randomDay(fiveMonthsAgo), note: 'Utilities' },
-        ];
-
-        const transactions = sampleTransactions.map(t => ({
-            ...t,
-            id: Utils.generateId(),
-            createdAt: new Date().toISOString()
-        }));
-
-        _set(KEYS.TRANSACTIONS, transactions);
+        _set(KEYS.TRANSACTIONS, []);
 
         // Seed budgets for current month
-        const sampleBudgets = [
-            { categoryId: 'food', month: currentMonth, amount: 6000 },
-            { categoryId: 'transport', month: currentMonth, amount: 3000 },
-            { categoryId: 'shopping', month: currentMonth, amount: 5000 },
-            { categoryId: 'bills', month: currentMonth, amount: 4000 },
-            { categoryId: 'entertainment', month: currentMonth, amount: 2000 },
-            { categoryId: 'grocery', month: currentMonth, amount: 5000 },
-            { categoryId: 'rent', month: currentMonth, amount: 9000 },
-            { categoryId: 'health', month: currentMonth, amount: 2000 },
-        ].map(b => ({ ...b, id: Utils.generateId() }));
-
-        _set(KEYS.BUDGETS, sampleBudgets);
+        _set(KEYS.BUDGETS, []);
 
         // Seed Goals
-        _set(KEYS.GOALS, [
-            { id: 'goal_1', name: 'Emergency Fund', target: 50000, saved: 15000, color: '#00d4aa' },
-            { id: 'goal_2', name: 'New Laptop', target: 120000, saved: 40000, color: '#6c5ce7' }
-        ]);
+        _set(KEYS.GOALS, []);
 
         // Seed Notifications
-        _set(KEYS.NOTIFICATIONS, [
-            { id: 'notif_1', text: 'You spent 20% more on Food this month.', date: new Date().toISOString(), read: false },
-            { id: 'notif_2', text: 'Emergency Fund goal is 30% complete!', date: new Date(Date.now() - 86400000).toISOString(), read: true }
-        ]);
+        _set(KEYS.NOTIFICATIONS, []);
 
         // Default settings
         _set(KEYS.SETTINGS, {
