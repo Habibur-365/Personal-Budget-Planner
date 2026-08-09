@@ -1955,9 +1955,9 @@ body {
         flex: 1;
     }
 
-    /* Hide some table columns on mobile */
+    /* Note column compact on mobile */
     .col-note {
-        display: none;
+        max-width: 80px;
     }
     .transactions-table th,
     .transactions-table td {
