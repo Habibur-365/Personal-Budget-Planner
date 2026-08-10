@@ -302,7 +302,6 @@ const Dashboard = (() => {
         container.innerHTML = transactions.map(tx => {
             const cat = Utils.getCategoryById(tx.category);
             const displayCatName = tx.customCategory || cat.name;
-            const amountFormatted = Utils.formatCurrency(tx.amount, true);
             const displayAmount = tx.type === 'income' ? `+${Utils.formatCurrency(tx.amount)}` : `-${Utils.formatCurrency(tx.amount)}`;
             return `
                 <div class="recent-item">

@@ -48,7 +48,7 @@ const Calendar = (() => {
 
             let dotsHtml = '';
             if (income > 0) dotsHtml += `<div class="cal-dot income" title="Income: ${Utils.formatCurrency(income)}">${Utils.formatCurrency(income)}</div>`;
-            if (expense > 0) dotsHtml += `<div class="cal-dot expense" title="Expense: ${Utils.formatCurrency(expense)}">-${Utils.formatCurrency(expense, false).replace(Utils.getCurrencySymbol(), '')}</div>`;
+            if (expense > 0) dotsHtml += `<div class="cal-dot expense" title="Expense: ${Utils.formatCurrency(expense)}">-${Utils.formatCurrency(expense)}</div>`;
 
             html += `
                 <div class="cal-cell ${isToday ? 'today' : ''}" data-date="${dateStr}">

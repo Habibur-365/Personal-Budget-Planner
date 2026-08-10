@@ -72,7 +72,7 @@ const App = (() => {
 
         // "View All" link on dashboard
         document.querySelectorAll('[data-page]').forEach(link => {
-            if (!link.classList.contains('nav-item')) {
+            if (!link.classList.contains('nav-item') && !link.classList.contains('bottom-nav-item')) {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
                     navigateTo(link.dataset.page);
@@ -198,10 +198,11 @@ const App = (() => {
 
         populate();
 
-        headerSelect.addEventListener('change', (e) => {
+        // Use onchange instead of addEventListener to prevent duplicate handlers
+        headerSelect.onchange = (e) => {
             Storage.setActiveWalletId(e.target.value);
             refreshCurrentPage();
-        });
+        };
     }
 
     /* ========== MODAL MANAGEMENT ========== */

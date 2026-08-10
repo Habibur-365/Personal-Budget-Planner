@@ -193,7 +193,7 @@ const Analytics = (() => {
                 },
                 scales: {
                     x: { grid: { display: false }, ticks: { color: theme.textColor, font: { family: 'Inter', size: 11 } } },
-                    y: { grid: { color: theme.gridColor }, ticks: { color: theme.textColor, font: { family: 'Inter', size: 11 }, callback: v => 'Tk' + (v / 1000).toFixed(0) + 'k' } }
+                    y: { grid: { color: theme.gridColor }, ticks: { color: theme.textColor, font: { family: 'Inter', size: 11 }, callback: v => Utils.getCurrencySymbol() + (v / 1000).toFixed(0) + 'k' } }
                 }
             }
         });
@@ -244,7 +244,7 @@ const Analytics = (() => {
                 },
                 scales: {
                     x: { grid: { display: false }, ticks: { color: theme.textColor, font: { family: 'Inter', size: 11 } } },
-                    y: { grid: { color: theme.gridColor }, ticks: { color: theme.textColor, font: { family: 'Inter', size: 11 }, callback: v => 'Tk' + (v / 1000).toFixed(0) + 'k' } }
+                    y: { grid: { color: theme.gridColor }, ticks: { color: theme.textColor, font: { family: 'Inter', size: 11 }, callback: v => Utils.getCurrencySymbol() + (v / 1000).toFixed(0) + 'k' } }
                 }
             }
         });
@@ -407,7 +407,7 @@ const Analytics = (() => {
                 responsive: true, maintainAspectRatio: false, indexAxis: 'y',
                 plugins: { legend: { display: false }, tooltip: tooltipConfig(theme) },
                 scales: {
-                    x: { grid: { color: theme.gridColor }, ticks: { color: theme.textColor, font: { family: 'Inter', size: 11 }, callback: v => 'Tk' + (v / 1000).toFixed(0) + 'k' } },
+                    x: { grid: { color: theme.gridColor }, ticks: { color: theme.textColor, font: { family: 'Inter', size: 11 }, callback: v => Utils.getCurrencySymbol() + (v / 1000).toFixed(0) + 'k' } },
                     y: { grid: { display: false }, ticks: { color: theme.textColor, font: { family: 'Inter', size: 11 } } }
                 }
             }
@@ -481,7 +481,7 @@ const Analytics = (() => {
                 },
                 scales: {
                     x: { grid: { display: false }, ticks: { color: theme.textColor, font: { family: 'Inter', size: 11 } } },
-                    y: { grid: { color: theme.gridColor }, ticks: { color: theme.textColor, font: { family: 'Inter', size: 11 }, callback: v => 'Tk' + (v / 1000).toFixed(0) + 'k' } }
+                    y: { grid: { color: theme.gridColor }, ticks: { color: theme.textColor, font: { family: 'Inter', size: 11 }, callback: v => Utils.getCurrencySymbol() + (v / 1000).toFixed(0) + 'k' } }
                 }
             }
         });

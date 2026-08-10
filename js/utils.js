@@ -64,7 +64,12 @@ const Utils = (() => {
             minimumFractionDigits: 0,
             maximumFractionDigits: 0
         });
-        const sign = showSign ? (amount >= 0 ? '+' : '-') : (amount < 0 ? '-' : '');
+        let sign = '';
+        if (showSign) {
+            sign = amount > 0 ? '+' : (amount < 0 ? '-' : '');
+        } else {
+            sign = amount < 0 ? '-' : '';
+        }
         const sym = getCurrencySymbol();
         return `${sign}${sym}${formatted}`;
     }
@@ -75,7 +80,12 @@ const Utils = (() => {
             minimumFractionDigits: 0,
             maximumFractionDigits: 0
         });
-        const sign = showSign ? (amount >= 0 ? '+' : '-') : (amount < 0 ? '-' : '');
+        let sign = '';
+        if (showSign) {
+            sign = amount > 0 ? '+' : (amount < 0 ? '-' : '');
+        } else {
+            sign = amount < 0 ? '-' : '';
+        }
         const c = CURRENCIES.find(x => x.code === code || x.symbol === code);
         const sym = c ? c.symbol : code;
         return `${sign}${sym}${formatted}`;

@@ -332,7 +332,7 @@ const Settings = (() => {
         };
 
         // PDF Export
-        document.getElementById('btn-export-pdf').onclick = () => {
+        document.getElementById('btn-export-pdf-settings').onclick = () => {
             if (!window.html2pdf) {
                 Utils.showToast('PDF Library not loaded', 'error');
                 return;
