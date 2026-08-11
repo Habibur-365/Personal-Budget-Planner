@@ -1,6 +1,6 @@
 /**
  * ============================================
- *  BudgetPro — Main Application Controller
+ *  HR Fund Manager — Main Application Controller
  * ============================================
  */
 
@@ -396,7 +396,7 @@ const App = (() => {
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `budgetpro-export-${Utils.getTodayString()}.json`;
+            a.download = `hr-fund-manager-export-${Utils.getTodayString()}.json`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);

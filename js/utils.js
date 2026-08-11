@@ -1,6 +1,6 @@
 /**
  * ============================================
- *  BudgetPro — Utility Functions
+ *  HR Fund Manager — Utility Functions
  * ============================================
  */
 

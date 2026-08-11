@@ -1,6 +1,6 @@
 {
-  "name": "HR BudgetPro — Personal Budget Planner",
-  "short_name": "HR BudgetPro",
+  "name": "HR Fund Manager — Personal Budget Planner",
+  "short_name": "HR Fund Manager",
   "description": "Track your income, expenses, and savings with beautiful charts, analytics, and smart budget goals.",
   "start_url": "./index.html",
   "display": "standalone",

@@ -1,6 +1,6 @@
 /**
  * ============================================
- *  BudgetPro — Settings & Wallet Management
+ *  HR Fund Manager — Settings & Wallet Management
  * ============================================
  */
 
@@ -323,7 +323,7 @@ const Settings = (() => {
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `budgetpro-export-${Utils.getTodayString()}.json`;
+            a.download = `hr-fund-manager-export-${Utils.getTodayString()}.json`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
@@ -362,7 +362,7 @@ const Settings = (() => {
 
             container.innerHTML = `
                 <div style="margin-bottom: 30px;">
-                    <h1 style="font-size: 24px; margin: 0; color: #1a1a2e;">HR BudgetPro</h1>
+                    <h1 style="font-size: 24px; margin: 0; color: #1a1a2e;">HR Fund Manager</h1>
                     <h2 style="font-size: 16px; margin: 5px 0; color: #444;">Financial Report</h2>
                     <p style="font-size: 12px; color: #888; margin: 0;">Generated on: ${new Date().toLocaleDateString()}</p>
                 </div>
@@ -385,7 +385,7 @@ const Settings = (() => {
 
             Utils.showToast('Generating PDF...', 'info');
             
-            const fileName = `budgetpro-report-${Utils.getTodayString()}.pdf`;
+            const fileName = `hr-fund-manager-report-${Utils.getTodayString()}.pdf`;
             const opt = {
                 margin:       15,
                 filename:     fileName,

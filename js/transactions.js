@@ -1,6 +1,6 @@
 /**
  * ============================================
- *  BudgetPro — Transactions View
+ *  HR Fund Manager — Transactions View
  * ============================================
  */
 
@@ -398,7 +398,7 @@ const Transactions = (() => {
 
         container.innerHTML = `
             <div style="margin-bottom: 30px;">
-                <h1 style="font-size: 24px; margin: 0; color: #1a1a2e;">HR BudgetPro</h1>
+                <h1 style="font-size: 24px; margin: 0; color: #1a1a2e;">HR Fund Manager</h1>
                 <h2 style="font-size: 16px; margin: 5px 0; color: #444;">${title}</h2>
                 <p style="font-size: 12px; color: #888; margin: 0;">Generated: ${new Date().toLocaleString()}</p>
             </div>
@@ -426,7 +426,7 @@ const Transactions = (() => {
             </div>
         `;
 
-        const fileName = `BudgetPro_Transactions_${new Date().toISOString().slice(0, 10)}.pdf`;
+        const fileName = `HR_Fund_Manager_Transactions_${new Date().toISOString().slice(0, 10)}.pdf`;
         
         Utils.showToast('Generating PDF...', 'info');
         
@@ -459,7 +459,7 @@ const Transactions = (() => {
 
         // Build worksheet data
         const wsData = [
-            ['BudgetPro — Transaction Report'],
+            ['HR Fund Manager — Transaction Report'],
             [getExportTitle()],
             [`Generated: ${new Date().toLocaleString()}`],
             [],
@@ -575,7 +575,7 @@ const Transactions = (() => {
 
         XLSX.utils.book_append_sheet(wb, ws, 'Transactions');
 
-        const fileName = `BudgetPro_Transactions_${new Date().toISOString().slice(0, 10)}.xlsx`;
+        const fileName = `HR_Fund_Manager_Transactions_${new Date().toISOString().slice(0, 10)}.xlsx`;
         XLSX.writeFile(wb, fileName);
         Utils.showToast('Excel exported successfully!', 'success');
     }

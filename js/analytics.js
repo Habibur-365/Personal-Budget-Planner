@@ -1,6 +1,6 @@
 /**
  * ============================================
- *  BudgetPro — Analytics View (Advanced)
+ *  HR Fund Manager — Analytics View (Advanced)
  * ============================================
  */
 

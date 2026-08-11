@@ -1,6 +1,6 @@
 /**
  * ============================================
- *  BudgetPro — Storage Module (LocalStorage)
+ *  HR Fund Manager — Storage Module (LocalStorage)
  * ============================================
  */
 
