@@ -1,4 +1,4 @@
-// HR Fund Manager Service Worker v1.0
+// Fund Manager Service Worker v1.0
 // Enables offline functionality and PWA install on mobile
 
 const CACHE_NAME = 'hr-fund-manager-v3';
@@ -24,7 +24,7 @@ const STATIC_ASSETS = [
 
 // ── Install: cache all static assets ──────────────────────────────────────────
 self.addEventListener('install', (event) => {
-  console.log('[SW] Installing HR Fund Manager Service Worker...');
+  console.log('[SW] Installing Fund Manager Service Worker...');
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       console.log('[SW] Caching static assets');
@@ -40,7 +40,7 @@ self.addEventListener('install', (event) => {
 
 // ── Activate: clean old caches ─────────────────────────────────────────────────
 self.addEventListener('activate', (event) => {
-  console.log('[SW] Activating HR Fund Manager Service Worker...');
+  console.log('[SW] Activating Fund Manager Service Worker...');
   event.waitUntil(
     caches.keys().then((cacheNames) =>
       Promise.all(

@@ -1,6 +1,6 @@
 /**
  * ============================================
- *  HR Fund Manager — Utility Functions
+ *  Fund Manager — Utility Functions
  * ============================================
  */
 

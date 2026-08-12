@@ -1,8 +1,8 @@
-# 💰 HR Fund Manager — Personal Budget Planner
+# 💰 Fund Manager — Personal Budget Planner
 
 <div align="center">
 
-![HR Fund Manager Banner](icons/icon-192.png)
+![Fund Manager Banner](icons/icon-192.png)
 
 **একটি সুন্দর, ফিচার-সমৃদ্ধ পার্সোনাল বাজেট ট্র্যাকার**
 
@@ -36,7 +36,7 @@
 1. ব্রাউজারে লাইভ লিংক ওপেন করুন
 2. মেনু (⋮) → **"Add to Home Screen"** ক্লিক করুন
 3. **"Install"** বা **"Add"** চাপুন
-4. হোম স্ক্রিনে HR Fund Manager অ্যাপ চলে আসবে ✅
+4. হোম স্ক্রিনে Fund Manager অ্যাপ চলে আসবে ✅
 
 ### iPhone/iPad (Safari)
 1. Safari-তে লাইভ লিংক ওপেন করুন
@@ -109,5 +109,5 @@ MIT License — Free to use and modify.
 ---
 
 <div align="center">
-Made with ❤️ | HR Fund Manager v1.0
+Made with ❤️ | Fund Manager v1.0
 </div>

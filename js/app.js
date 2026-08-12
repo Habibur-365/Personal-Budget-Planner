@@ -1,6 +1,6 @@
 /**
  * ============================================
- *  HR Fund Manager — Main Application Controller
+ *  Fund Manager — Main Application Controller
  * ============================================
  */
 

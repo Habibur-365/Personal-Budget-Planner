@@ -1,6 +1,6 @@
 {
-  "name": "HR Fund Manager",
-  "short_name": "HR Fund Manager",
+  "name": "Fund Manager",
+  "short_name": "Fund Manager",
   "description": "Track your income, expenses, and savings with beautiful charts, analytics, and smart budget goals.",
   "start_url": "./index.html",
   "display": "standalone",

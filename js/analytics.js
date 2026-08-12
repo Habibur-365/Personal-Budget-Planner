@@ -1,6 +1,6 @@
 /**
  * ============================================
- *  HR Fund Manager — Analytics View (Advanced)
+ *  Fund Manager — Analytics View (Advanced)
  * ============================================
  */
 

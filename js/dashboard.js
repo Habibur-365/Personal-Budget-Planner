@@ -1,6 +1,6 @@
 /**
  * ============================================
- *  HR Fund Manager — Dashboard View
+ *  Fund Manager — Dashboard View
  * ============================================
  */
 

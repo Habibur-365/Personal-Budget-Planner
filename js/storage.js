@@ -1,6 +1,6 @@
 /**
  * ============================================
- *  HR Fund Manager — Storage Module (LocalStorage)
+ *  Fund Manager — Storage Module (LocalStorage)
  * ============================================
  */
 

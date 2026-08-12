@@ -1,6 +1,6 @@
 /**
  * ============================================
- *  HR Fund Manager — Settings & Wallet Management
+ *  Fund Manager — Settings & Wallet Management
  * ============================================
  */
 
@@ -362,7 +362,7 @@ const Settings = (() => {
 
             container.innerHTML = `
                 <div style="margin-bottom: 30px;">
-                    <h1 style="font-size: 24px; margin: 0; color: #1a1a2e;">HR Fund Manager</h1>
+                    <h1 style="font-size: 24px; margin: 0; color: #1a1a2e;">Fund Manager</h1>
                     <h2 style="font-size: 16px; margin: 5px 0; color: #444;">Financial Report</h2>
                     <p style="font-size: 12px; color: #888; margin: 0;">Generated on: ${new Date().toLocaleDateString()}</p>
                 </div>
