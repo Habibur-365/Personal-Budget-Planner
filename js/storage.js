@@ -385,41 +385,7 @@ const Storage = (() => {
             .sort((a, b) => b.amount - a.amount);
     }
 
-    /* ========== EXPORT / IMPORT ========== */
-    function exportData() {
-        const data = {
-            version: 2,
-            exportDate: new Date().toISOString(),
-            wallets: getWallets(),
-            transactions: getAllTransactions(),
-            budgets: getBudgets(),
-            settings: getSettings(),
-            goals: getSavingsGoals(),
-            notifications: getNotifications(),
-            recurring: getRecurringTransactions()
-        };
-        return JSON.stringify(data, null, 2);
-    }
 
-    function importData(jsonString) {
-        try {
-            const data = JSON.parse(jsonString);
-            if (!data.transactions || !Array.isArray(data.transactions)) {
-                throw new Error('Invalid data format');
-            }
-            _set(KEYS.TRANSACTIONS, data.transactions);
-            if (data.wallets) _set(KEYS.WALLETS, data.wallets);
-            if (data.budgets) _set(KEYS.BUDGETS, data.budgets);
-            if (data.settings) _set(KEYS.SETTINGS, data.settings);
-            if (data.goals) _set(KEYS.GOALS, data.goals);
-            if (data.notifications) _set(KEYS.NOTIFICATIONS, data.notifications);
-            if (data.recurring) _set(KEYS.RECURRING, data.recurring);
-            return true;
-        } catch (e) {
-            console.error('Import error:', e);
-            return false;
-        }
-    }
 
     function clearAll() {
         localStorage.removeItem(KEYS.TRANSACTIONS);
@@ -520,8 +486,7 @@ const Storage = (() => {
         updateSettings,
         getMonthlySummary,
         getCategoryBreakdown,
-        exportData,
-        importData,
+
         clearAll,
         seedDefaultData
     };

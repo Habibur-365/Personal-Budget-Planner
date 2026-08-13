@@ -35,7 +35,6 @@ const App = (() => {
         setupModalClose();
         setupWalletSelector();
         setupTransactionForm();
-        setupExportImport();
         setupFAB();
         setupMobileMenu();
         setupNotifications();
@@ -387,47 +386,7 @@ const App = (() => {
         });
     }
 
-    /* ========== EXPORT / IMPORT ========== */
-    function setupExportImport() {
-        // Export
-        document.getElementById('btn-export').addEventListener('click', () => {
-            const data = Storage.exportData();
-            const blob = new Blob([data], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `hr-fund-manager-export-${Utils.getTodayString()}.json`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            Utils.showToast('Data exported successfully!', 'success');
-        });
 
-        // Import button
-        document.getElementById('btn-import').addEventListener('click', () => {
-            document.getElementById('import-data').value = '';
-            openModal('modal-import-overlay');
-        });
-
-        // Import action
-        document.getElementById('btn-import-action').addEventListener('click', () => {
-            const jsonStr = document.getElementById('import-data').value.trim();
-            if (!jsonStr) {
-                Utils.showToast('Please paste your JSON data', 'error');
-                return;
-            }
-
-            const success = Storage.importData(jsonStr);
-            if (success) {
-                closeModal('modal-import-overlay');
-                Utils.showToast('Data imported successfully!', 'success');
-                refreshCurrentPage();
-            } else {
-                Utils.showToast('Invalid data format. Please check your JSON.', 'error');
-            }
-        });
-    }
 
     /* ========== FAB (Mobile Add Button) ========== */
     function setupFAB() {

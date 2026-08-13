@@ -371,10 +371,6 @@ const Transactions = (() => {
 
         const title = getExportTitle();
 
-        // Compute summary
-        const totalIncome = data.filter(d => d.type === 'Income').reduce((s, d) => s + d.amount, 0);
-        const totalExpense = data.filter(d => d.type === 'Expense').reduce((s, d) => s + d.amount, 0);
-
         // Create a hidden HTML container for the PDF content
         const container = document.createElement('div');
         container.style.padding = '30px';
@@ -395,6 +391,10 @@ const Transactions = (() => {
                 </tr>
             `;
         });
+
+        // Compute summary
+        const totalIncome = data.filter(d => d.type === 'Income').reduce((s, d) => s + d.amount, 0);
+        const totalExpense = data.filter(d => d.type === 'Expense').reduce((s, d) => s + d.amount, 0);
 
         container.innerHTML = `
             <div style="margin-bottom: 30px;">

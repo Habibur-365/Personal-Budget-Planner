@@ -104,22 +104,7 @@
                 </svg>
                 <span class="toggle-label">Dark Mode</span>
             </button>
-            <div class="sidebar-actions">
-                <button class="sidebar-action-btn" id="btn-export" title="Export Data">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                        <polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
-                    </svg>
-                    <span>Export</span>
-                </button>
-                <button class="sidebar-action-btn" id="btn-import" title="Import Data">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                        <polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
-                    </svg>
-                    <span>Import</span>
-                </button>
-            </div>
+
         </div>
     </aside>
 
@@ -359,6 +344,7 @@
                             Excel
                         </button>
                     </div>
+
                 </div>
 
                 <div class="tx-summary-cards" style="display: flex; gap: 16px; margin-bottom: 20px;">
@@ -643,18 +629,6 @@
                         </div>
                     </div>
 
-                    <!-- Export & Import -->
-                    <div class="glass-card" style="padding: 24px; margin-top: 24px;">
-                        <h2 style="margin-bottom: 20px;">📦 Export & Import</h2>
-                        <div style="display:flex; flex-wrap:wrap; gap:12px;">
-                            <button class="btn btn-primary" id="btn-export-pdf-settings">📄 Export PDF</button>
-                            <button class="btn btn-outline" id="btn-export-json">📥 Export JSON</button>
-                            <label class="btn btn-outline" style="cursor:pointer;">
-                                📤 Import CSV/Excel
-                                <input type="file" id="file-import-csv" accept=".csv,.xlsx,.xls" style="display:none;">
-                            </label>
-                        </div>
-                    </div>
 
                 </div>
             </section>
@@ -902,25 +876,6 @@
         </div>
     </div>
 
-    <!-- Import Modal -->
-    <div class="modal-overlay" id="modal-import-overlay">
-        <div class="modal" id="modal-import">
-            <div class="modal-header">
-                <h2>Import Data</h2>
-                <button class="modal-close" data-close="modal-import-overlay" aria-label="Close">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                </button>
-            </div>
-            <p class="import-warning">⚠️ Importing data will <strong>replace</strong> all existing data. Make sure to export your current data first.</p>
-            <div class="form-group">
-                <textarea id="import-data" rows="8" placeholder="Paste your exported JSON data here..."></textarea>
-            </div>
-            <div class="form-actions">
-                <button type="button" class="btn btn-ghost" data-close="modal-import-overlay">Cancel</button>
-                <button type="button" class="btn btn-primary" id="btn-import-action">Import Data</button>
-            </div>
-        </div>
-    </div>
 
     <!-- ===== TOAST CONTAINER ===== -->
     <div class="toast-container" id="toast-container"></div>

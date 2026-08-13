@@ -1706,16 +1706,7 @@ body {
     line-height: 1.6;
 }
 
-.import-warning {
-    padding: 0 24px 12px;
-    font-size: 0.85rem;
-    color: var(--accent-warning);
-    background: rgba(255, 217, 61, 0.06);
-    margin: 0 24px 12px;
-    padding: 12px 14px;
-    border-radius: var(--radius-sm);
-    border: 1px solid rgba(255, 217, 61, 0.15);
-}
+
 
 /* ========== TOAST ========== */
 .toast-container {
@@ -1962,7 +1953,6 @@ body {
     .export-group .btn-export {
         flex: 1;
     }
-
     /* Note column compact on mobile */
     .col-note {
         max-width: 80px;
