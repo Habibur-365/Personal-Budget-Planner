@@ -380,20 +380,30 @@
                     </div>
                 </div>
 
+                <div class="table-zoom-toolbar" id="table-zoom-toolbar">
+                    <span class="zoom-label">Zoom:</span>
+                    <button class="zoom-btn" id="zoom-out-btn" title="Zoom Out">−</button>
+                    <span class="zoom-level" id="zoom-level">100%</span>
+                    <button class="zoom-btn" id="zoom-in-btn" title="Zoom In">+</button>
+                    <button class="zoom-btn zoom-reset" id="zoom-reset-btn" title="Reset Zoom">⟳</button>
+                </div>
+
                 <div class="transactions-table-wrap glass-card">
-                    <table class="transactions-table" id="transactions-table">
-                        <thead>
-                            <tr>
-                                <th class="sortable" data-sort="date">Date <span class="sort-icon">↕</span></th>
-                                <th>Category</th>
-                                <th class="col-note">Note</th>
-                                <th>Type</th>
-                                <th class="sortable" data-sort="amount">Amount <span class="sort-icon">↕</span></th>
-                                <th class="col-actions">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="transactions-body"></tbody>
-                    </table>
+                    <div class="table-zoom-container" id="table-zoom-container">
+                        <table class="transactions-table" id="transactions-table">
+                            <thead>
+                                <tr>
+                                    <th class="sortable" data-sort="date">Date <span class="sort-icon">↕</span></th>
+                                    <th>Category</th>
+                                    <th class="col-note">Note</th>
+                                    <th>Type</th>
+                                    <th class="sortable" data-sort="amount">Amount <span class="sort-icon">↕</span></th>
+                                    <th class="col-actions">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transactions-body"></tbody>
+                        </table>
+                    </div>
                 </div>
 
                 <div class="empty-state" id="transactions-empty" style="display:none;">

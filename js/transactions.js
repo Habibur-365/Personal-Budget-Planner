@@ -250,6 +250,67 @@ const Transactions = (() => {
         // Export buttons
         document.getElementById('btn-export-pdf').addEventListener('click', exportToPDF);
         document.getElementById('btn-export-excel').addEventListener('click', exportToExcel);
+
+        // ---- Table Zoom Controls ----
+        setupTableZoom();
+    }
+
+    /* ---------- Table Zoom ---------- */
+    let currentZoom = 1;
+    const ZOOM_STEP = 0.1;
+    const ZOOM_MIN = 0.4;
+    const ZOOM_MAX = 1.2;
+
+    function setupTableZoom() {
+        const zoomInBtn = document.getElementById('zoom-in-btn');
+        const zoomOutBtn = document.getElementById('zoom-out-btn');
+        const zoomResetBtn = document.getElementById('zoom-reset-btn');
+        const container = document.getElementById('table-zoom-container');
+        const wrapper = document.querySelector('.transactions-table-wrap');
+
+        if (!zoomInBtn || !container) return;
+
+        // Auto-fit zoom on mobile: calculate the scale needed to fit table in wrapper
+        function autoFitZoom() {
+            if (window.innerWidth <= 768) {
+                const wrapperWidth = wrapper.offsetWidth;
+                const tableWidth = 520; // min-width of table
+                const fitScale = Math.min(1, wrapperWidth / tableWidth);
+                currentZoom = Math.round(fitScale * 10) / 10; // round to 1 decimal
+                applyZoom();
+            } else {
+                currentZoom = 1;
+                applyZoom();
+            }
+        }
+
+        function applyZoom() {
+            container.style.transform = `scale(${currentZoom})`;
+            container.style.width = `${100 / currentZoom}%`; // counteract width shrink
+            document.getElementById('zoom-level').textContent = `${Math.round(currentZoom * 100)}%`;
+        }
+
+        zoomInBtn.addEventListener('click', () => {
+            if (currentZoom < ZOOM_MAX) {
+                currentZoom = Math.round((currentZoom + ZOOM_STEP) * 10) / 10;
+                applyZoom();
+            }
+        });
+
+        zoomOutBtn.addEventListener('click', () => {
+            if (currentZoom > ZOOM_MIN) {
+                currentZoom = Math.round((currentZoom - ZOOM_STEP) * 10) / 10;
+                applyZoom();
+            }
+        });
+
+        zoomResetBtn.addEventListener('click', () => {
+            autoFitZoom();
+        });
+
+        // Auto-fit on load and resize
+        autoFitZoom();
+        window.addEventListener('resize', autoFitZoom);
     }
 
     /* ---------- Open Edit Modal ---------- */
