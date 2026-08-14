@@ -1879,7 +1879,7 @@ body {
 }
 
 /* Mobile */
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
     html {
         font-size: 14px; /* Shrinks overall UI elements and text slightly on mobile */
     }
@@ -1947,37 +1947,36 @@ body {
 
     /* ---- Mobile Responsive Fixed Table ---- */
     .transactions-table-wrap {
-        overflow-x: hidden; /* No horizontal scroll */
         border-radius: var(--radius-md);
     }
     .transactions-table {
-        min-width: 0;
+        min-width: 600px; /* Force wide table so user can zoom out */
         width: 100%;
         table-layout: fixed;
     }
     .transactions-table th,
     .transactions-table td {
-        padding: 6px 2px;
-        font-size: 0.65rem;
+        padding: 8px 4px;
+        font-size: 0.7rem;
         word-wrap: break-word;
         white-space: normal;
         vertical-align: middle;
     }
     .transactions-table th {
-        font-size: 0.55rem;
-        padding: 4px 2px;
+        font-size: 0.6rem;
+        padding: 6px 4px;
         text-align: center;
     }
     .transactions-table td {
         text-align: center;
     }
-    /* Set column widths to force fit */
-    .transactions-table th:nth-child(1) { width: 45px; } /* Date */
+    /* Adjusted column widths for more breathing room (Total specific: ~260px) */
+    .transactions-table th:nth-child(1) { width: 50px; } /* Date */
     .transactions-table th:nth-child(2) { width: auto; text-align: left; } /* Category */
-    .transactions-table th:nth-child(3) { width: 40px; } /* Note */
-    .transactions-table th:nth-child(4) { width: 45px; } /* Type */
-    .transactions-table th:nth-child(5) { width: 55px; } /* Amount */
-    .transactions-table th:nth-child(6) { width: 45px; } /* Actions */
+    .transactions-table th:nth-child(3) { width: 45px; } /* Note */
+    .transactions-table th:nth-child(4) { width: 50px; } /* Type */
+    .transactions-table th:nth-child(5) { width: 65px; } /* Amount */
+    .transactions-table th:nth-child(6) { width: 50px; } /* Actions */
     
     .transactions-table td:nth-child(2) { text-align: left; }
 
@@ -1985,22 +1984,22 @@ body {
     .tx-note-text {
         max-width: none;
         white-space: normal;
-        font-size: 0.6rem;
+        font-size: 0.65rem;
     }
-    .tx-category-icon { font-size: 0.75rem; }
-    .tx-category-cell { gap: 2px; }
+    .tx-category-icon { font-size: 0.8rem; }
+    .tx-category-cell { gap: 4px; }
     .tx-type-badge {
-        padding: 2px 4px;
-        font-size: 0.55rem;
+        padding: 3px 5px;
+        font-size: 0.6rem;
         letter-spacing: 0;
     }
     .tx-action-btn {
-        width: 20px;
-        height: 20px;
-        font-size: 0.65rem;
+        width: 24px;
+        height: 24px;
+        font-size: 0.7rem;
         border-radius: 4px;
     }
-    .tx-actions { gap: 2px; justify-content: center; }
+    .tx-actions { gap: 4px; justify-content: center; }
     .col-actions { width: auto; }
     /* ---- End Mobile Responsive Fixed Table ---- */
 
@@ -2137,7 +2136,7 @@ body {
     opacity: 1;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
     .sidebar { display: none; } /* Hide sidebar completely in favor of bottom nav */
     .menu-toggle { display: none; }
     .bottom-nav { display: flex; }
@@ -2315,7 +2314,7 @@ body {
     color: var(--accent-danger);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
     .cal-cell {
         min-height: 60px;
         padding: 4px;
