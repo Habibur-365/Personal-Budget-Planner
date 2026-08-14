@@ -1880,6 +1880,10 @@ body {
 
 /* Mobile */
 @media (max-width: 768px) {
+    html {
+        font-size: 14px; /* Shrinks overall UI elements and text slightly on mobile */
+    }
+
     .sidebar {
         transform: translateX(-100%);
     }
@@ -1941,6 +1945,80 @@ body {
         grid-template-columns: 1fr;
     }
 
+    /* ---- Mobile Card Layout for Transaction Table ---- */
+    .transactions-table-wrap {
+        overflow-x: visible;
+        overflow-y: visible;
+    }
+    .transactions-table,
+    .transactions-table thead,
+    .transactions-table tbody,
+    .transactions-table th,
+    .transactions-table td,
+    .transactions-table tr {
+        display: block;
+    }
+    .transactions-table thead {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+    }
+    .transactions-table tbody tr {
+        margin-bottom: 12px;
+        background: var(--bg-tertiary);
+        border-radius: var(--radius-md);
+        padding: 12px 14px;
+        border: 1px solid var(--border-color);
+    }
+    .transactions-table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 0;
+        border: none;
+        border-bottom: 1px solid var(--border-color);
+        font-size: 0.82rem;
+    }
+    .transactions-table td:last-child {
+        border-bottom: none;
+    }
+    .transactions-table td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        color: var(--text-secondary);
+        margin-right: 12px;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+    .col-note {
+        max-width: none;
+    }
+    .tx-note-text {
+        max-width: 180px;
+        text-align: right;
+    }
+    .tx-actions {
+        justify-content: flex-end;
+    }
+    .col-actions {
+        width: auto;
+    }
+    /* ---- End Mobile Card Layout ---- */
+
+    .action-buttons {
+        gap: 4px;
+    }
+    
+    .btn-icon {
+        padding: 4px;
+    }
+
     .dashboard-bottom-row {
         grid-template-columns: 1fr;
     }
@@ -1966,14 +2044,12 @@ body {
     .export-group .btn-export {
         flex: 1;
     }
-    /* Note column compact on mobile */
-    .col-note {
-        max-width: 80px;
+    .export-group {
+        width: 100%;
+        justify-content: stretch;
     }
-    .transactions-table th,
-    .transactions-table td {
-        padding: 10px 8px;
-        font-size: 0.82rem;
+    .export-group .btn-export {
+        flex: 1;
     }
 
     .budget-overview {
@@ -1997,7 +2073,7 @@ body {
 
     .fab {
         display: flex;
-        bottom: calc(80px + env(safe-area-inset-bottom, 0px)); /* above bottom nav */
+        bottom: calc(68px + env(safe-area-inset-bottom, 0px)); /* above smaller bottom nav */
     }
 
     .modal {
@@ -2034,11 +2110,11 @@ body {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: calc(65px + env(safe-area-inset-bottom, 0px));
+    height: calc(52px + env(safe-area-inset-bottom, 0px));
     background: var(--bg-secondary);
     border-top: 1px solid var(--border-color);
     z-index: 100;
-    padding: 0 10px env(safe-area-inset-bottom, 0px) 10px;
+    padding: 4px 5px env(safe-area-inset-bottom, 0px) 5px;
     align-items: center;
     justify-content: space-around;
     backdrop-filter: blur(10px);
@@ -2051,7 +2127,7 @@ body {
     justify-content: center;
     color: var(--text-secondary);
     text-decoration: none;
-    gap: 4px;
+    gap: 2px;
     flex: 1;
     height: 100%;
     transition: color var(--transition-fast);
@@ -2059,10 +2135,12 @@ body {
 
 .bottom-nav-item svg {
     opacity: 0.7;
+    width: 18px;
+    height: 18px;
 }
 
 .bottom-nav-item span {
-    font-size: 0.65rem;
+    font-size: 0.55rem;
     font-weight: 500;
 }
 
@@ -2077,7 +2155,7 @@ body {
     .sidebar { display: none; } /* Hide sidebar completely in favor of bottom nav */
     .menu-toggle { display: none; }
     .bottom-nav { display: flex; }
-    .content-area { padding-bottom: 90px; } /* Space for bottom nav */
+    .content-area { padding-bottom: 70px; } /* Space for bottom nav */
 }
 
 /* Notification Dropdown */

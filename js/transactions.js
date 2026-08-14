@@ -152,23 +152,23 @@ const Transactions = (() => {
 
             return `
                 <tr data-id="${tx.id}">
-                    <td>${Utils.formatDate(tx.date)}</td>
-                    <td>
+                    <td data-label="Date">${Utils.formatDate(tx.date)}</td>
+                    <td data-label="Category">
                         <div class="tx-category-cell">
                             <span class="tx-category-icon">${cat.icon}</span>
                             <span>${Utils.sanitizeHTML(displayCatName)}</span>
                         </div>
                     </td>
-                    <td class="col-note">
+                    <td class="col-note" data-label="Note">
                         <span class="tx-note-text">${Utils.sanitizeHTML(tx.note) || '—'}</span>
                     </td>
-                    <td>
+                    <td data-label="Type">
                         <span class="tx-type-badge ${tx.type}">${tx.type}</span>
                     </td>
-                    <td>
+                    <td data-label="Amount">
                         <span class="tx-amount ${tx.type}">${formattedAmount}</span>
                     </td>
-                    <td class="col-actions">
+                    <td class="col-actions" data-label="Actions">
                         <div class="tx-actions">
                             <button class="tx-action-btn edit" data-id="${tx.id}" title="Edit">
                                 ✎
