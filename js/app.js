@@ -276,40 +276,19 @@ const App = (() => {
                     document.querySelectorAll('#tx-type-toggle .toggle-btn').forEach(b => b.classList.remove('active'));
                     e.target.classList.add('active');
                     currentType = e.target.dataset.type;
-                    populateTransactionCategories(currentType);
-                    
-                    const categorySelect = document.getElementById('tx-category');
-                    if (categorySelect) {
-                        const ev = new Event('change');
-                        categorySelect.dispatchEvent(ev);
-                    }
                 }
             });
         }
 
         if (form) {
-            const categorySelect = document.getElementById('tx-category');
-            const customCategoryGroup = document.getElementById('tx-custom-category-group');
-            const customCategoryInput = document.getElementById('tx-custom-category');
-            if (categorySelect && customCategoryGroup && customCategoryInput) {
-                categorySelect.addEventListener('change', (e) => {
-                    if (e.target.value === 'other_expense' || e.target.value === 'other_income') {
-                        customCategoryGroup.style.display = 'block';
-                        customCategoryInput.required = true;
-                    } else {
-                        customCategoryGroup.style.display = 'none';
-                        customCategoryInput.required = false;
-                        customCategoryInput.value = '';
-                    }
-                });
-            }
 
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const id = document.getElementById('tx-id').value;
                 const amount = document.getElementById('tx-amount').value;
-                const category = document.getElementById('tx-category').value;
-                const customCategory = customCategoryInput ? customCategoryInput.value.trim() : '';
+                const categoryInput = document.getElementById('tx-category').value.trim();
+                const category = 'manual_input'; // Keep a generic ID
+                const customCategory = categoryInput; // The actual typed string
                 const date = document.getElementById('tx-date').value;
                 const note = document.getElementById('tx-note').value;
                 const walletId = walletSelect ? walletSelect.value : undefined;
@@ -340,8 +319,7 @@ const App = (() => {
             });
         }
 
-        // Initialize categories & wallets
-        populateTransactionCategories(currentType);
+        // Initialize wallets
         updateWalletDropdown();
 
         // Listen for Add button globally
@@ -357,16 +335,8 @@ const App = (() => {
                 const expenseBtn = document.querySelector('#tx-type-toggle .toggle-btn[data-type="expense"]');
                 if(expenseBtn) expenseBtn.classList.add('active');
                 currentType = 'expense';
-                populateTransactionCategories(currentType);
                 updateWalletDropdown();
 
-                const customCategoryGroup = document.getElementById('tx-custom-category-group');
-                const customCategoryInput = document.getElementById('tx-custom-category');
-                if (customCategoryGroup) customCategoryGroup.style.display = 'none';
-                if (customCategoryInput) {
-                    customCategoryInput.required = false;
-                    customCategoryInput.value = '';
-                }
 
                 openModal('modal-transaction-overlay');
             });
@@ -374,16 +344,7 @@ const App = (() => {
     }
 
     function populateTransactionCategories(type, targetId = 'tx-category') {
-        const select = document.getElementById(targetId);
-        if (!select) return;
-        const categories = Utils.getCategoriesByType(type);
-        select.innerHTML = '';
-        categories.forEach(cat => {
-            const opt = document.createElement('option');
-            opt.value = cat.id;
-            opt.textContent = `${cat.icon} ${cat.name}`;
-            select.appendChild(opt);
-        });
+        // No longer used, manual input only
     }
 
 

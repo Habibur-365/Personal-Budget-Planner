@@ -254,6 +254,9 @@ const Utils = (() => {
     ];
 
     function getCategoryById(id) {
+        if (id === 'manual_input') {
+            return { id: 'manual_input', name: 'Manual Entry', icon: '📌', color: '#6c5ce7' };
+        }
         return [...EXPENSE_CATEGORIES, ...INCOME_CATEGORIES].find(c => c.id === id) ||
             { id: 'unknown', name: 'Unknown', icon: '❓', color: '#8888a8' };
     }
