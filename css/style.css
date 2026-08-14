@@ -1945,71 +1945,53 @@ body {
         grid-template-columns: 1fr;
     }
 
-    /* ---- Mobile Card Layout for Transaction Table ---- */
+    /* ---- Mobile Compact Table ---- */
     .transactions-table-wrap {
-        overflow-x: visible;
-        overflow-y: visible;
-    }
-    .transactions-table,
-    .transactions-table thead,
-    .transactions-table tbody,
-    .transactions-table th,
-    .transactions-table td,
-    .transactions-table tr {
-        display: block;
-    }
-    .transactions-table thead {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        border: 0;
-    }
-    .transactions-table tbody tr {
-        margin-bottom: 12px;
-        background: var(--bg-tertiary);
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
         border-radius: var(--radius-md);
-        padding: 12px 14px;
-        border: 1px solid var(--border-color);
     }
+    .transactions-table {
+        min-width: 520px; /* Ensure table maintains proper columns */
+    }
+    .transactions-table th,
     .transactions-table td {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 5px 0;
-        border: none;
-        border-bottom: 1px solid var(--border-color);
-        font-size: 0.82rem;
-    }
-    .transactions-table td:last-child {
-        border-bottom: none;
-    }
-    .transactions-table td::before {
-        content: attr(data-label);
-        font-weight: 600;
+        padding: 8px 6px;
         font-size: 0.72rem;
-        text-transform: uppercase;
-        color: var(--text-secondary);
-        margin-right: 12px;
+    }
+    .transactions-table th {
+        font-size: 0.65rem;
+        letter-spacing: 0;
         white-space: nowrap;
-        flex-shrink: 0;
     }
     .col-note {
-        max-width: none;
+        max-width: 70px;
     }
     .tx-note-text {
-        max-width: 180px;
-        text-align: right;
+        max-width: 70px;
+    }
+    .tx-category-icon {
+        font-size: 0.85rem;
+    }
+    .tx-category-cell {
+        gap: 4px;
+    }
+    .tx-type-badge {
+        padding: 2px 6px;
+        font-size: 0.62rem;
+    }
+    .tx-action-btn {
+        width: 26px;
+        height: 26px;
+        font-size: 0.75rem;
     }
     .tx-actions {
-        justify-content: flex-end;
+        gap: 3px;
     }
     .col-actions {
-        width: auto;
+        width: 65px;
     }
-    /* ---- End Mobile Card Layout ---- */
+    /* ---- End Mobile Compact Table ---- */
 
     .action-buttons {
         gap: 4px;
@@ -2036,13 +2018,6 @@ body {
     .filter-select {
         flex: 1;
         min-width: 120px;
-    }
-    .export-group {
-        width: 100%;
-        justify-content: stretch;
-    }
-    .export-group .btn-export {
-        flex: 1;
     }
     .export-group {
         width: 100%;
