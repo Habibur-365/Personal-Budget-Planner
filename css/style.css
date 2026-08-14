@@ -1089,6 +1089,7 @@ body {
 }
 .btn-export svg {
     flex-shrink: 0;
+}
 
 /* Transaction Table */
 .transactions-table-wrap {
