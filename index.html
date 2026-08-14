@@ -193,7 +193,7 @@
         <div class="content-area" id="content-area">
 
             <!-- ===== DASHBOARD PAGE ===== -->
-            <section class="page active" id="page-dashboard">
+            <section class="page" id="page-dashboard">
                 <div class="glass-card ai-insights-card" style="margin-bottom: 24px; padding: 16px 20px; display: flex; align-items: center; gap: 16px; border-left: 4px solid var(--accent-primary);">
                     <div style="background: var(--accent-primary-glow); color: var(--accent-primary); width: 40px; height: 40px; border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                         <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
@@ -934,6 +934,39 @@
             <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
         </svg>
     </button>
+
+    <!-- Anti-flicker script for routing -->
+    <script>
+        (function() {
+            var hash = window.location.hash.replace('#', '') || 'dashboard';
+            var validPages = ['dashboard', 'transactions', 'budget', 'analytics', 'settings', 'calendar'];
+            if (validPages.indexOf(hash) === -1) hash = 'dashboard';
+            
+            // Wait for DOM parsing, but execute before full load/paint
+            document.addEventListener('DOMContentLoaded', function() {
+                var activeEls = document.querySelectorAll('.nav-item.active, .bottom-nav-item.active, .page.active');
+                for (var i = 0; i < activeEls.length; i++) {
+                    activeEls[i].classList.remove('active');
+                }
+                var newNavs = document.querySelectorAll('.nav-item[data-page="' + hash + '"], .bottom-nav-item[data-page="' + hash + '"]');
+                for (var j = 0; j < newNavs.length; j++) {
+                    newNavs[j].classList.add('active');
+                }
+                var pageEl = document.getElementById('page-' + hash);
+                if(pageEl) pageEl.classList.add('active');
+                var titles = {
+                    dashboard: 'Dashboard',
+                    transactions: 'Transactions',
+                    budget: 'Budget Goals',
+                    analytics: 'Analytics',
+                    calendar: 'Calendar',
+                    settings: 'Settings'
+                };
+                var titleEl = document.getElementById('page-title');
+                if(titleEl) titleEl.textContent = titles[hash] || 'Dashboard';
+            });
+        })();
+    </script>
 
     <!-- ===== SCRIPTS ===== -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
