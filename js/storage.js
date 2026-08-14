@@ -18,6 +18,34 @@ const Storage = (() => {
         RECURRING: 'bp_recurring'
     };
 
+    let currentUser = null;
+
+    async function syncFromFirebase(user) {
+        currentUser = user;
+        if (!window.FirebaseApp) return;
+
+        try {
+            const docRef = FirebaseApp.db.collection('users').doc(user.uid);
+            const docSnap = await docRef.get();
+            
+            if (docSnap.exists) {
+                const data = docSnap.data();
+                // Restore all keys to localStorage
+                Object.values(KEYS).forEach(key => {
+                    if (data[key] !== undefined) {
+                        localStorage.setItem(key, JSON.stringify(data[key]));
+                    }
+                });
+            } else {
+                // First time user, just let normal seed flow happen, which will then trigger _set and sync to Firebase
+                seedDefaultData();
+            }
+        } catch (error) {
+            console.error("Error fetching from Firebase:", error);
+            // Will fallback to local data if network fails
+        }
+    }
+
     /* ---------- Generic Helpers ---------- */
     function _get(key) {
         try {
@@ -32,6 +60,15 @@ const Storage = (() => {
     function _set(key, value) {
         try {
             localStorage.setItem(key, JSON.stringify(value));
+            
+            // Sync to Firebase in background
+            if (currentUser && window.FirebaseApp) {
+                FirebaseApp.db.collection('users').doc(currentUser.uid).set({
+                    [key]: value
+                }, { merge: true }).catch(err => {
+                    console.error("Firebase sync error:", err);
+                });
+            }
         } catch (e) {
             console.error('Storage write error:', e);
         }
@@ -486,6 +523,7 @@ const Storage = (() => {
         updateSettings,
         getMonthlySummary,
         getCategoryBreakdown,
+        syncFromFirebase,
 
         clearAll,
         seedDefaultData

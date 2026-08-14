@@ -487,5 +487,76 @@ const App = (() => {
 
 /* ========== START THE APP ========== */
 document.addEventListener('DOMContentLoaded', () => {
-    App.init();
+    if (!window.FirebaseApp) {
+        App.init();
+        return;
+    }
+
+    // Wait for Firebase Auth state
+    FirebaseApp.auth.onAuthStateChanged((user) => {
+        const loginOverlay = document.getElementById('modal-login-overlay');
+        const userProfile = document.getElementById('user-profile');
+        
+        if (user) {
+            // User is logged in
+            if(loginOverlay) loginOverlay.style.display = 'none';
+            if(userProfile) {
+                userProfile.style.display = 'block';
+                const avatar = document.getElementById('user-avatar');
+                const dropdownAvatar = document.getElementById('dropdown-avatar');
+                const dropdownName = document.getElementById('dropdown-user-name');
+                const dropdownEmail = document.getElementById('dropdown-user-email');
+                
+                const photoURL = user.photoURL || 'icons/icon-72.png';
+                if(avatar) avatar.src = photoURL;
+                if(dropdownAvatar) dropdownAvatar.src = photoURL;
+                if(dropdownName) dropdownName.textContent = user.displayName || 'User';
+                if(dropdownEmail) dropdownEmail.textContent = user.email || '';
+            }
+            
+            // Sync data from firestore then init app
+            Storage.syncFromFirebase(user).then(() => {
+                App.init();
+            });
+            
+        } else {
+            // User is logged out
+            if(loginOverlay) loginOverlay.style.display = 'flex';
+            if(userProfile) userProfile.style.display = 'none';
+        }
+    });
+
+    // Profile dropdown toggle
+    const avatarBtn = document.getElementById('user-avatar-btn');
+    const userDropdown = document.getElementById('user-dropdown');
+    if (avatarBtn && userDropdown) {
+        avatarBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            userDropdown.classList.toggle('active');
+        });
+        document.addEventListener('click', (e) => {
+            if (!userDropdown.contains(e.target) && !avatarBtn.contains(e.target)) {
+                userDropdown.classList.remove('active');
+            }
+        });
+    }
+
+    const btnLogin = document.getElementById('btn-login-google');
+    if(btnLogin) {
+        btnLogin.addEventListener('click', () => {
+            FirebaseApp.auth.signInWithPopup(FirebaseApp.googleProvider).catch(err => {
+                Utils.showToast('Login Failed: ' + err.message, 'error');
+            });
+        });
+    }
+
+    const btnLogout = document.getElementById('btn-logout');
+    if(btnLogout) {
+        btnLogout.addEventListener('click', () => {
+            FirebaseApp.auth.signOut().then(() => {
+                Storage.clearAll(); // Clear local data on logout
+                location.reload();
+            });
+        });
+    }
 });
