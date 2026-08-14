@@ -2,7 +2,7 @@
 <html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="description" content="Fund Manager — Track your income, expenses, and savings with beautiful charts, analytics, and smart budget goals.">
     <title>Fund Manager</title>
 
@@ -380,30 +380,20 @@
                     </div>
                 </div>
 
-                <div class="table-zoom-toolbar" id="table-zoom-toolbar">
-                    <span class="zoom-label">Zoom:</span>
-                    <button class="zoom-btn" id="zoom-out-btn" title="Zoom Out">−</button>
-                    <span class="zoom-level" id="zoom-level">100%</span>
-                    <button class="zoom-btn" id="zoom-in-btn" title="Zoom In">+</button>
-                    <button class="zoom-btn zoom-reset" id="zoom-reset-btn" title="Reset Zoom">⟳</button>
-                </div>
-
                 <div class="transactions-table-wrap glass-card">
-                    <div class="table-zoom-container" id="table-zoom-container">
-                        <table class="transactions-table" id="transactions-table">
-                            <thead>
-                                <tr>
-                                    <th class="sortable" data-sort="date">Date <span class="sort-icon">↕</span></th>
-                                    <th>Category</th>
-                                    <th class="col-note">Note</th>
-                                    <th>Type</th>
-                                    <th class="sortable" data-sort="amount">Amount <span class="sort-icon">↕</span></th>
-                                    <th class="col-actions">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="transactions-body"></tbody>
-                        </table>
-                    </div>
+                    <table class="transactions-table" id="transactions-table">
+                        <thead>
+                            <tr>
+                                <th class="sortable" data-sort="date">Date <span class="sort-icon">↕</span></th>
+                                <th>Category</th>
+                                <th class="col-note">Note</th>
+                                <th>Type</th>
+                                <th class="sortable" data-sort="amount">Amount <span class="sort-icon">↕</span></th>
+                                <th class="col-actions">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactions-body"></tbody>
+                    </table>
                 </div>
 
                 <div class="empty-state" id="transactions-empty" style="display:none;">

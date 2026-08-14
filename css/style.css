@@ -1089,66 +1089,6 @@ body {
 }
 .btn-export svg {
     flex-shrink: 0;
-}
-/* Table Zoom Toolbar */
-.table-zoom-toolbar {
-    display: none; /* Hidden on desktop, shown on mobile via media query */
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    margin-bottom: 10px;
-    padding: 8px 12px;
-    background: var(--bg-tertiary);
-    border-radius: var(--radius-md);
-    border: 1px solid var(--border-color);
-}
-.zoom-label {
-    font-size: 0.72rem;
-    font-weight: 600;
-    color: var(--text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-}
-.zoom-btn {
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-sm);
-    background: var(--bg-surface);
-    color: var(--text-primary);
-    font-size: 1rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all var(--transition-fast);
-    font-family: inherit;
-}
-.zoom-btn:hover {
-    background: var(--accent-primary);
-    color: white;
-    border-color: var(--accent-primary);
-}
-.zoom-btn:active {
-    transform: scale(0.92);
-}
-.zoom-reset {
-    font-size: 0.85rem;
-}
-.zoom-level {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: var(--accent-primary);
-    min-width: 36px;
-    text-align: center;
-}
-
-/* Table Zoom Container */
-.table-zoom-container {
-    transform-origin: top left;
-    transition: transform 0.2s ease;
-}
 
 /* Transaction Table */
 .transactions-table-wrap {
@@ -2004,12 +1944,10 @@ body {
         grid-template-columns: 1fr;
     }
 
-    /* ---- Mobile Compact Table with Zoom ---- */
-    .table-zoom-toolbar {
-        display: flex; /* Show zoom controls on mobile */
-    }
+    /* ---- Mobile Compact Table ---- */
     .transactions-table-wrap {
-        overflow: hidden; /* No scroll — zoom handles fit */
+        overflow-x: auto; /* Allow horizontal scroll for wide table */
+        -webkit-overflow-scrolling: touch;
         border-radius: var(--radius-md);
     }
     .transactions-table {
