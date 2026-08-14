@@ -1945,53 +1945,64 @@ body {
         grid-template-columns: 1fr;
     }
 
-    /* ---- Mobile Compact Table ---- */
+    /* ---- Mobile Responsive Fixed Table ---- */
     .transactions-table-wrap {
-        overflow-x: auto; /* Allow horizontal scroll for wide table */
-        -webkit-overflow-scrolling: touch;
+        overflow-x: hidden; /* No horizontal scroll */
         border-radius: var(--radius-md);
     }
     .transactions-table {
-        min-width: 520px; /* Ensure table columns stay proper */
+        min-width: 0;
+        width: 100%;
+        table-layout: fixed;
     }
     .transactions-table th,
     .transactions-table td {
-        padding: 8px 6px;
-        font-size: 0.72rem;
+        padding: 6px 2px;
+        font-size: 0.65rem;
+        word-wrap: break-word;
+        white-space: normal;
+        vertical-align: middle;
     }
     .transactions-table th {
-        font-size: 0.65rem;
-        letter-spacing: 0;
-        white-space: nowrap;
+        font-size: 0.55rem;
+        padding: 4px 2px;
+        text-align: center;
     }
-    .col-note {
-        max-width: 70px;
+    .transactions-table td {
+        text-align: center;
     }
+    /* Set column widths to force fit */
+    .transactions-table th:nth-child(1) { width: 45px; } /* Date */
+    .transactions-table th:nth-child(2) { width: auto; text-align: left; } /* Category */
+    .transactions-table th:nth-child(3) { width: 40px; } /* Note */
+    .transactions-table th:nth-child(4) { width: 45px; } /* Type */
+    .transactions-table th:nth-child(5) { width: 55px; } /* Amount */
+    .transactions-table th:nth-child(6) { width: 45px; } /* Actions */
+    
+    .transactions-table td:nth-child(2) { text-align: left; }
+
+    .col-note { max-width: none; }
     .tx-note-text {
-        max-width: 70px;
+        max-width: none;
+        white-space: normal;
+        font-size: 0.6rem;
     }
-    .tx-category-icon {
-        font-size: 0.85rem;
-    }
-    .tx-category-cell {
-        gap: 4px;
-    }
+    .tx-category-icon { font-size: 0.75rem; }
+    .tx-category-cell { gap: 2px; }
     .tx-type-badge {
-        padding: 2px 6px;
-        font-size: 0.62rem;
+        padding: 2px 4px;
+        font-size: 0.55rem;
+        letter-spacing: 0;
     }
     .tx-action-btn {
-        width: 26px;
-        height: 26px;
-        font-size: 0.75rem;
+        width: 20px;
+        height: 20px;
+        font-size: 0.65rem;
+        border-radius: 4px;
     }
-    .tx-actions {
-        gap: 3px;
-    }
-    .col-actions {
-        width: 65px;
-    }
-    /* ---- End Mobile Compact Table ---- */
+    .tx-actions { gap: 2px; justify-content: center; }
+    .col-actions { width: auto; }
+    /* ---- End Mobile Responsive Fixed Table ---- */
 
     .action-buttons {
         gap: 4px;
