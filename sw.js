@@ -1,7 +1,7 @@
 // Fund Manager Service Worker v1.0
 // Enables offline functionality and PWA install on mobile
 
-const CACHE_NAME = 'hr-fund-manager-v16';
+const CACHE_NAME = 'hr-fund-manager-v14';
 const STATIC_ASSETS = [
   './',
   './index.html',
