@@ -400,9 +400,9 @@ const Transactions = (() => {
                 <tr style="border-bottom: 1px solid #eee;">
                     <td style="padding: 10px 8px;">${d.date}</td>
                     <td style="padding: 10px 8px;">${d.category}</td>
-                    <td style="padding: 10px 8px;">${d.note}</td>
                     <td style="padding: 10px 8px; font-weight: bold; color: ${typeColor};">${d.type}</td>
                     <td style="padding: 10px 8px; text-align: right; color: ${amountColor};">${d.amountFormatted}</td>
+                    <td style="padding: 10px 8px;">${d.note}</td>
                 </tr>
             `;
         });
@@ -422,10 +422,10 @@ const Transactions = (() => {
                 <thead>
                     <tr style="background-color: #7c5cfc; color: white; text-align: left;">
                         <th style="padding: 10px 8px;">Date</th>
-                        <th style="padding: 10px 8px;">Category</th>
-                        <th style="padding: 10px 8px;">Note</th>
+                        <th style="padding: 10px 8px;">Description</th>
                         <th style="padding: 10px 8px;">Type</th>
                         <th style="padding: 10px 8px; text-align: right;">Amount</th>
+                        <th style="padding: 10px 8px;">Note</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -478,8 +478,8 @@ const Transactions = (() => {
             [getExportTitle()],
             [`Generated: ${new Date().toLocaleString()}`],
             [],
-            ['Date', 'Category', 'Note', 'Type', 'Amount'],
-            ...data.map(d => [d.date, d.category, d.note, d.type, d.amount]),
+            ['Date', 'Description', 'Type', 'Amount', 'Note'],
+            ...data.map(d => [d.date, d.category, d.type, d.amount, d.note]),
             [],
             ['Summary'],
             ['Total Transactions', data.length],
@@ -510,7 +510,7 @@ const Transactions = (() => {
             };
 
             // Amount columns align right
-            if (col === 'E' && row > 3) {
+            if (col === 'D' && row > 3) {
                 cell.s.alignment.horizontal = "right";
             }
 
@@ -534,8 +534,8 @@ const Transactions = (() => {
             }
             // Data Rows - color coding Income/Expense
             else if (row >= 5 && row < 5 + data.length) {
-                const typeCell = ws['D' + (row + 1)];
-                if (typeCell && (col === 'D' || col === 'E')) {
+                const typeCell = ws['C' + (row + 1)];
+                if (typeCell && (col === 'C' || col === 'D')) {
                     const isIncome = typeCell.v === 'Income';
                     cell.s.font.color = { rgb: isIncome ? "00B464" : "DC3232" };
                     cell.s.font.bold = true;
@@ -562,10 +562,10 @@ const Transactions = (() => {
         // Column widths perfectly balanced to fill A4 width without spilling over
         ws['!cols'] = [
             { wch: 14 }, // Date
-            { wch: 20 }, // Category
-            { wch: 22 }, // Note
+            { wch: 20 }, // Description
             { wch: 12 }, // Type
-            { wch: 16 }  // Amount
+            { wch: 16 }, // Amount
+            { wch: 22 }  // Note
         ];
 
         // Merge title row
