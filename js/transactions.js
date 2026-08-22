@@ -169,19 +169,19 @@ const Transactions = (() => {
             return `
                 <tr data-id="${tx.id}">
                     <td data-label="Date">${Utils.formatDate(tx.date)}</td>
-                    <td data-label="Category">
+                    <td data-label="Description">
                         <div class="tx-category-cell">
                             <span>${Utils.sanitizeHTML(displayCatName)}</span>
                         </div>
-                    </td>
-                    <td class="col-note" data-label="Note">
-                        <span class="tx-note-text">${Utils.sanitizeHTML(tx.note) || '—'}</span>
                     </td>
                     <td data-label="Type">
                         <span class="tx-type-badge ${tx.type}">${tx.type}</span>
                     </td>
                     <td data-label="Amount">
                         <span class="tx-amount ${tx.type}">${formattedAmount}</span>
+                    </td>
+                    <td class="col-note" data-label="Note">
+                        <span class="tx-note-text">${Utils.sanitizeHTML(tx.note) || '—'}</span>
                     </td>
                     <td class="col-actions" data-label="Actions">
                         <div class="tx-actions">
