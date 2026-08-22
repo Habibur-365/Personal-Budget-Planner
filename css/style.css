@@ -1973,10 +1973,10 @@ body {
     }
     /* Set column widths to force fit */
     .transactions-table th:nth-child(1) { width: 45px; } /* Date */
-    .transactions-table th:nth-child(2) { width: auto; text-align: left; } /* Category */
-    .transactions-table th:nth-child(3) { width: 75px; } /* Note */
-    .transactions-table th:nth-child(4) { width: 45px; } /* Type */
-    .transactions-table th:nth-child(5) { width: 70px; } /* Amount */
+    .transactions-table th:nth-child(2) { width: auto; text-align: left; } /* Description */
+    .transactions-table th:nth-child(3) { width: 45px; } /* Type */
+    .transactions-table th:nth-child(4) { width: 75px; } /* Amount */
+    .transactions-table th:nth-child(5) { width: 70px; } /* Note */
     .transactions-table th:nth-child(6) { width: 45px; } /* Actions */
     
     .transactions-table td:nth-child(2) { text-align: left; }
