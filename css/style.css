@@ -1971,15 +1971,19 @@ body {
     .transactions-table td {
         text-align: center;
     }
-    /* Set column widths to force fit */
-    .transactions-table th:nth-child(1) { width: 45px; } /* Date */
-    .transactions-table th:nth-child(2) { width: auto; text-align: left; } /* Description */
-    .transactions-table th:nth-child(3) { width: 35px; } /* Type */
-    .transactions-table th:nth-child(4) { width: 95px; } /* Amount */
-    .transactions-table th:nth-child(5) { width: 60px; } /* Note */
-    .transactions-table th:nth-child(6) { width: 45px; } /* Actions */
-    
-    .transactions-table td:nth-child(2) { text-align: left; }
+    /* Set column widths using % for table-layout: fixed */
+    .transactions-table th:nth-child(1),
+    .transactions-table td:nth-child(1) { width: 13%; } /* Date */
+    .transactions-table th:nth-child(2),
+    .transactions-table td:nth-child(2) { width: 24%; text-align: left; } /* Description */
+    .transactions-table th:nth-child(3),
+    .transactions-table td:nth-child(3) { width: 10%; } /* Type */
+    .transactions-table th:nth-child(4),
+    .transactions-table td:nth-child(4) { width: 26%; } /* Amount */
+    .transactions-table th:nth-child(5),
+    .transactions-table td:nth-child(5) { width: 14%; } /* Note */
+    .transactions-table th:nth-child(6),
+    .transactions-table td:nth-child(6) { width: 13%; } /* Actions */
 
     .col-note { max-width: none; }
     .tx-note-text {
