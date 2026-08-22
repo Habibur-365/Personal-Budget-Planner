@@ -21,16 +21,32 @@ const Transactions = (() => {
     /* ---------- Populate Category Filter ---------- */
     function populateCategoryFilter() {
         const select = document.getElementById('filter-category');
+        if (!select) return;
+
+        const transactions = Storage.getTransactions();
+        const usedCategoryIds = new Set();
+        transactions.forEach(t => {
+            if (t.category) {
+                usedCategoryIds.add(t.category);
+            }
+        });
+
         const allCategories = [...Utils.EXPENSE_CATEGORIES, ...Utils.INCOME_CATEGORIES];
+        const usedCategories = allCategories.filter(cat => usedCategoryIds.has(cat.id));
 
         // Keep only the "All Categories" option and rebuild
         select.innerHTML = '<option value="all">All Categories</option>';
-        allCategories.forEach(cat => {
+        usedCategories.forEach(cat => {
             const opt = document.createElement('option');
             opt.value = cat.id;
             opt.textContent = `${cat.icon} ${cat.name}`;
             select.appendChild(opt);
         });
+
+        if (currentFilters.category !== 'all' && !usedCategoryIds.has(currentFilters.category)) {
+            currentFilters.category = 'all';
+        }
+        select.value = currentFilters.category || 'all';
     }
 
     /* ---------- Populate Month Filter ---------- */
@@ -155,7 +171,6 @@ const Transactions = (() => {
                     <td data-label="Date">${Utils.formatDate(tx.date)}</td>
                     <td data-label="Category">
                         <div class="tx-category-cell">
-                            <span class="tx-category-icon">${cat.icon}</span>
                             <span>${Utils.sanitizeHTML(displayCatName)}</span>
                         </div>
                     </td>
